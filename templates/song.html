@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>{{ song.title }}!</h1>
+  <p class="lead">&ndash; {{ song.artist }}</p>
+  <form method="POST" action="{{ url_for('delete_song', song_id=song.id) }}">
+    <button type="submit" class="btn btn-danger">Delete Song</button>
+    <a href="{{ url_for('show_all_songs') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+<div>
+  <h3>Playlists this song is in:</h3>
+  <ul>
+    {% for playlist in song.playlists %}
+    <li>
+      <a href="/playlists/{{ playlist.id }}">'{{ playlist.name }}'</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
